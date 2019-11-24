@@ -7,8 +7,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using System.Configuration;
 using OpenQA.Selenium.Support.UI;
 
 namespace SBWebApplicationTests
@@ -68,7 +66,7 @@ namespace SBWebApplicationTests
                 var loginButton = driver.FindElement(By.Id("loginBtn"));
                 loginButton.Click();
                 Console.WriteLine("Button was submitted.");
-                driver.Navigate().GoToUrl(appURL + "/");
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists((By.ClassName("loginControl"))));
                 var loginControls = driver.FindElements(By.ClassName("loginControl"));
                 Assert.AreEqual(1, loginControls.Count);
 
